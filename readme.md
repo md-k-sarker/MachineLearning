@@ -5,6 +5,9 @@ Implementations include 1 example on how to use it.
 
 ##Implemented algorithms
 <li>
+Logistic Regression	
+</li>
+<li>
 Neural network
 </li>
 
