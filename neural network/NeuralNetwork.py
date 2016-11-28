@@ -76,7 +76,11 @@ class NeuralNetwork:
     def trainModel(self,inputVector, outputVector, maxIteration, minError, learningRate=.3, momentum=50, batch = False):
         '''
         Train Neural network using backpropagation.
-        Currently online update is implemented only.
+        Currently online update is implemented.
+        To do impementation: 
+        Batch Mode. -- 
+        1. Stochastic gradient descent ---- Choose any data point randomly and calculate error.
+        2. Traditional gradient descent --- Iterate over all data point to calculate error.  
         :param inputVector:
         :param outputVector:
         :param maxIteration:
