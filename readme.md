@@ -1,9 +1,9 @@
-#Machine Learning Algorithms in Python
+# Machine Learning Algorithms in Python
 
 Several machine learning algorithms implemented in python. 
 Implementations include 1 example on how to use it.
 
-##Implemented algorithms
+## Implemented algorithms
 <li>
 Linear Regression	
 </li>
@@ -14,4 +14,4 @@ Logistic Regression
 Neural network
 </li>
 
-###Assignments for Machine Learning course cs:7830 at Wright State University
+### Assignments for Machine Learning course cs:7830 at Wright State University
