@@ -27,7 +27,7 @@ class NeuralNetwork:
         '''
         
         '''
-        WEIGHT is a list which contains all weight of all connection.
+        WEIGHT is a list of matrix which contains all weight of all connection.
         e.g: 
         For first layer
         If input layer no. of neurons is 4+1(bias) and layer 1 no. of neurons is 4 then weight matrix will be
@@ -48,14 +48,20 @@ class NeuralNetwork:
             self.neuronsInEachLayer.append(HiddenLayerNoOfNeuronWithBias)
         self.neuronsInEachLayer.append(OutputLayerNoOfNeuron) 
         
+        print('neurons in each layer: ', self.neuronsInEachLayer)
+        
         self.totalLayerSize = 1 + totalHiddenLayerSize + 1
         
         '''assign random weight for input-hiddenLayer 1 connections'''
         weight = np.zeros((HiddenLayerNoOfNeuronWithBias , InputLayerNoOfNeuronWithBias))
+  
         for j in range(0, HiddenLayerNoOfNeuronWithBias):
+                '''get an array of 14 random values'''
                 weightj = np.float128(np.random.uniform(0, 1, size=InputLayerNoOfNeuronWithBias))
+                '''fill each row of the matrix one by one.'''
                 weight[j] = weightj
         self.WEIGHT.append(weight)
+
         
         '''assign random weight for hiddenLayer-hiddenLayer connections'''
         for l in range(1, totalHiddenLayerSize):
@@ -93,12 +99,15 @@ class NeuralNetwork:
         avgCostPerIteration = 1e10
         costsPerIteration = []
         iteration = 0
-          
+        
+        print('train input vector shape: ', inputVector.shape)
+        print('train output vector shape: ', outputVector.shape)  
         while(iteration < maxIteration and avgCostPerIteration > minError):
             costPerIteration = 0
             iteration += 1
             finalLayerOutputs = []
             
+            ''' do for each instance of the training data, i.e. online update'''
             for i in range(0, inputVector.shape[0]):
                 '''Forward Propagation'''
                 '''List of output for each layer'''
@@ -159,7 +168,7 @@ class NeuralNetwork:
             '''print cost per iteration to show the error is decreasing'''
             sampleNo = randint(0,inputVector.shape[0]-1)
             if(iteration % 100 == 0):
-                print('IterationNo: ', iteration, ' CostPerIteration: ', avgCostPerIteration, ' ActualOutput[',sampleNo,']: ', outputVector[sampleNo], ' PredictedOutput: ',finalLayerOutputs[sampleNo])
+                print('IterationNo: ', iteration, ' CostPerIteration: ', avgCostPerIteration,'sampleNo[',sampleNo,']', ' ActualOutput: ', outputVector[sampleNo], ' PredictedOutput: ',finalLayerOutputs[sampleNo])
     
         
         return self.WEIGHT, costsPerIteration
@@ -208,5 +217,8 @@ def getSigmoid(x):
         '''math domain error or math range error occurred'''
             
     return np.float128(1 / denomWithOnePlus)
+
+def getReLu(x):
+    return max(0,x)
 
 

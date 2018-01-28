@@ -30,25 +30,30 @@ def convertDatatoZeroOne(dataList):
     return dataAsZeroOne 
 
 def getNormalizedData(dataMatrix):
-    
+    ''' this function is creating problem by transposing the whole matrix'''
+    ''' Solutinon: https://stackoverflow.com/questions/29661574/normalize-numpy-array-columns-in-python'''
     dataMatrix = np.array(dataMatrix)
-    normalizedDatas = [] 
-    
-    for i in range(0,dataMatrix.shape[1]):
-        
-        columnData = dataMatrix[:,i]
-        _mean = np.mean(columnData)
-        _max = np.max(columnData)
-        _min = np.min(columnData)
-        
-        normalizedData = []
-        
-        for eachData in columnData:
-            normalizedData.append((eachData - _mean) / (_max - _mean))
-        
-        normalizedDatas.append(normalizedData)
-        
-    return np.array(normalizedDatas)
+#     normalizedDatas = []
+#
+#     for i in range(0,dataMatrix.shape[1]):
+#
+#         columnData = dataMatrix[:,i]
+#         _mean = np.mean(columnData)
+#         _max = np.max(columnData)
+#         _min = np.min(columnData)
+#
+#         normalizedData = []
+#
+#         for eachData in columnData:
+#             normalizedData.append((eachData - _mean) / (_max - _mean))
+#
+#         normalizedDatas.append(normalizedData)
+    '''    
+    For reductions (i.e. .max(), .min(), .sum(), .mean() etc.), you just need to remember that 
+    axis specifies the dimension that you want to "collapse" during the reduction. 
+    If you want the maximum for each column, then you need to collapse the the row dimension.'''
+    dataMatrix = (dataMatrix - dataMatrix.min(axis=0)) / dataMatrix.ptp(axis=0)
+    return dataMatrix
 
 def getVectorizedClassValues(classes):
     OutputLayerNoOfNeuron = len(set(classes)) 
